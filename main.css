@@ -1,0 +1,49 @@
+.container{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /*aligned title and button center*/
+}
+
+.tweet{
+  display: block;
+  box-shadow: 0 1px 3px gainsboro;
+  /* line-height: 17px; */
+  width: 530px;
+  border-color: lightgray;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 10px 5px;
+  padding: 15px;
+}
+
+.message{
+  font-family: "Helvetica Neue";
+  font-size: 25px;
+  padding-bottom: 10px;
+  padding-left: 6%;
+}
+
+.user{
+  font-family: "Helvetica Neue";
+  font-size: 15px;
+  padding-left: 3%;
+}
+
+a {
+  color: skyblue;
+  text-decoration: none;
+  font-weight: bold;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1,h2{
+  color: skyblue;
+  font-family: "Helvetica Neue";
+  margin: 5px auto;
+  font-size: 45px;
+  text-align: center;
+}
