@@ -3,25 +3,85 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
+    <div class = "container">
+      <h1 class ="title"> Twiddler</h1>
+      <button class='btn'>New Tweet</button>
+      <div class="newsfeed"></div>
+    </div>
+
     <script>
-
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        var $body = $(".newsfeed");
+        var $user = $('<div class=user></div>')
+        //$body.html('');
 
-        var index = streams.home.length - 1;
+        //displays a new tweet with message, user, and time each traversal
+        var index = 5;
         while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          var tweet = streams.home[index]; // array of tweets
+          var $tweet = $('<div class=tweet></div>');
+          var $user = $('<div class=user></div>');
+          var $message = $('<div class=message></div>');
+
+          $tweet.appendTo('.newsfeed')
+          $user.html('<a href="#' + tweet.user + '"> @'
+            + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
+          $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
+
           index -= 1;
         }
 
-      });
+        //button to display one new tweet
+        var $button = $(".btn");
+        $button.on('click',function (){
+          generateOneRandomTweet();
+          clearTimeline();
+        });
 
+
+        // generates a new random tweet
+      var generateOneRandomTweet = function(){
+        var index = Math.floor(Math.random() * streams.home.length);
+        var counter = 0;
+        while(counter >= 0){
+          var tweet = streams.home[index]; // array of tweets
+          var $tweet = $('<div class=tweet></div>');
+          var $user = $('<div class=user></div>');
+          var $message = $('<div class=message></div>');
+
+          $tweet.prependTo('.newsfeed')
+          $user.html('<a href="#' + tweet.user + '"> @'
+            + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
+          $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
+          counter -= 1;
+        }
+      }
+
+
+      //clears timeline when username is clicked
+      var clearTimeline = function() {$("a[href^='#']" ).on('click', function(event) {
+          event.preventDefault(); // cancels event
+          $('.container').remove(); // removes container div
+          //console.log(tweet.user);
+
+          var $timeline = $('<div class=timeline></div>');
+          $timeline.appendTo('body');
+          $timeline.html('<h2>'+ tweet.user +'\'s Timeline</h2>').appendTo($timeline);
+          generateOneRandomTweet().appendTo('.timeline');
+
+        });
+      }
+      clearTimeline();
+
+      //display a user's timeline
+
+      });//end of document.ready function
     </script>
+
+
   </body>
 </html>
