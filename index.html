@@ -9,38 +9,41 @@
   <body>
     <div class = "container">
       <h1 class ="title"> Twiddler</h1>
-      <button class='btn'>New Tweet</button>
+      <button class='btn-tweet'> (1) New Tweet</button>
       <div class="newsfeed"></div>
     </div>
 
     <script>
-      $(document).ready(function(){
+      $(document).ready(function(user){
         //displays a new tweet with message, user, and time each traversal
 
-        var displayTweets = function(tweetsCollection) {
-          var index = 5;
+        var displayTweets = function(user) {
+          var index = 6;
           while(index >= 0){
-            var tweet = streams.home[index]; // array of tweets
+            var tweet = streams.home[index];
             var $tweet = $('<div class=tweet></div>');
             var $user = $('<div class=user></div>');
             var $message = $('<div class=message></div>');
             var $dateTime = $('<span class=dateTime></span>');
-
+            user = tweet.user || user;
             $tweet.appendTo(".newsfeed")
-            $user.html('<a href="#' + tweet.user + '">'
-              + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
+            $user.html('<a href="#' + user + '">@'
+              + user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
             $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
 
             index -= 1;
           }
         }
-        displayTweets(streams.home);
+        displayTweets();
+        //generateOneRandomTweet().show(5000);
 
-        //button to display one new tweet
-        var $button = $(".btn");
-        $button.click(function (){
+        // When clicked, button will display one new tweet
+        var button = function() {
+          $(".btn-tweet").click(function (){
           generateOneRandomTweet();
-        });
+          });
+        }
+        button();
 
         // generates one new random tweet
         var generateOneRandomTweet = function(){
@@ -53,29 +56,28 @@
             var $message = $('<div class=message></div>');
 
             $tweet.prependTo('.newsfeed')
-            $user.html('<a href="#' + tweet.user + '">'
-              + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
+            $user.html('<a href="#' + tweet.user + '">@' + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
             $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
+
             counter -= 1;
           }
           clearTimeline();
         }
 
-        //clears timeline when username is clicked
-
-        var clearTimeline = function() {$("a[href^='#']" ).on('click', function(event) {
-            event.preventDefault(); // cancels event
-            var username = event.target.text;
-            $('.container').html(''); // clears container div containing tweets
-            var $timeline = $('<div class=newsfeed><h2>'+ username + 'Timeline</h2></div>').appendTo('body');
-            usersTweets(username);
+        // When username name is clicked, displays user's timeline
+        var clearTimeline = function() {
+            $("a").on('click', function(event) {
+              event.preventDefault();
+              var username = this.getAttribute('href').slice(1);
+              $('.container').html('');
+              var $timeline = $('<div class=newsfeed><h2>'+ username + '\'s Timeline</h2></div>').appendTo('.container');
+              usersTweets(username);
           });
         }
         clearTimeline();
 
-        //timeline
         var usersTweets = function(username) {
-          var index = 5;
+          var index = 8;
           while(index >= 0){
             var tweet = streams.home[index]; // array of tweets
             var $tweet = $('<div class=tweet></div>');
@@ -84,7 +86,7 @@
             var $dateTime = $('<span class=dateTime></span>');
 
             $tweet.appendTo(".newsfeed")
-            $user.html('<a href="#' + username + '">'
+            $user.html('<a href="#' + username + '">@'
               + username + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
             $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
 
