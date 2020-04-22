@@ -6,7 +6,7 @@
     <script src="https://momentjs.com/downloads/moment.js"></script>
     <script src="https://kit.fontawesome.com/128037f178.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="main.css">
-    <title> Twiddle</title>
+    <title> Home / Twiddler</title>
     <link rel="icon" href="images/twitter-logo.png" type="image/icon type">
   </head>
   <body>
@@ -14,9 +14,9 @@
       <h1 class ="title"> <i class="fab fa-twitter"></i> Twiddler</h1>
       <input class = 'tweet' id = "input" placeholder="What's happening?">
       <div id ="btn">
-        <button class='btn-tweet'> View Tweet Pending ... (1)</button>
+        <button class='btn-tweet'> <i class="fab fa-twitter"></i> View Tweet Pending ... (1)</button>
         <input id = "guestName" placeholder="Enter Guest Name">
-        <button class='btn-submit-tweet' id = "btn-submit-tweet">Submit Tweet</button>
+        <button class='btn-submit-tweet' id = "btn-submit-tweet"><i class="fab fa-twitter"></i> Submit Tweet</button>
       </div>
       <div class="newsfeed"></div>
     </div>
@@ -32,11 +32,13 @@
             var $user = $('<div class=user></div>');
             var $message = $('<div class=message></div>');
             var $dateTime = $('<span class=dateTime></span>');
+            var $icons = $('<div class=icons></div>');
+
             $tweet.appendTo(".newsfeed")
             $user.html('<a href="#' + tweet.user + '">@'
               + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
             $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
-
+            $icons.html('<i id="icon-img" class="far fa-comment">17</i>' + '<i id="icon-img" class="fas fa-retweet"> 5</i>' + '<i id="icon-img" class="far fa-heart"> 1238 </i>' + '<i id="icon-img" class="far fa-bookmark"></i>').appendTo($tweet);
             index -= 1;
           }
         }
@@ -48,13 +50,20 @@
           generateOneRandomTweet();
         });
 
-        // When username name is clicked, displays user's timeline
+        // When username name is clicked, displays user's timeline and changes title bar to username
         var clearTimeline = function() {
             $("a").on('click', function(event) {
               event.preventDefault();
               var username = this.getAttribute('href').slice(1);
+
               $('.container').html('');
-              var $timeline = $('<div class=newsfeed><h2><i class="fab fa-twitter"></i> '+ username + '\'s Timeline</h2></div>').appendTo('.container');
+              $('title').text('@' + username + ' / Twiddler');
+
+              var $bio = $('<div class=bio></div>');
+              var $timeline = $('<div class=newsfeed><h3>'+ username + '</h3></div>').appendTo('.container');
+
+              $bio.html('@' + username + '<br>I like to watch anime<br> <span><i class="fa fa-calendar" aria-hidden="true"></i> Joined September 2009 </span><br> <b>198</b> <span>Following</span> <b>297</b> <span>Followers</span>').appendTo($timeline);
+
               usersTweets(username);
           });
         }
@@ -68,10 +77,13 @@
             var $tweet = $('<div class=tweet></div>');
             var $user = $('<div class=user></div>');
             var $message = $('<div class=message></div>');
+            var $icons = $('<div class=icons></div>');
 
-            $tweet.prependTo('.newsfeed')
-            $user.html('<a href="#' + tweet.user + '">@' + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
+            $tweet.prependTo(".newsfeed")
+            $user.html('<a href="#' + tweet.user + '">@'
+              + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
             $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
+            $icons.html('<i id="icon-img" class="far fa-comment">17</i>' + '<i id="icon-img" class="fas fa-retweet"> 5</i>' + '<i id="icon-img" class="far fa-heart"> 1238 </i>' + '<i id="icon-img" class="far fa-bookmark"></i>').appendTo($tweet);
 
             counter -= 1;
           }
@@ -89,11 +101,13 @@
             var $user = $('<div class=user></div>');
             var $message = $('<div class=message></div>');
             var $dateTime = $('<span class=dateTime></span>');
+            var $icons = $('<div class=icons></div>');
 
             $tweet.appendTo(".newsfeed")
             $user.html('<a href="#' + username + '">@'
               + username + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
             $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
+            $icons.html('<i id="icon-img" class="far fa-comment">17</i>' + '<i id="icon-img" class="fas fa-retweet"> 5</i>' + '<i id="icon-img" class="far fa-heart"> 1238 </i>' + '<i id="icon-img" class="far fa-bookmark"></i>').appendTo($tweet);
 
             index -= 1;
           }
@@ -107,6 +121,7 @@
           var $user = $('<div class=user></div>');
           var $message = $('<div class=message></div>');
           var date = new Date().toString()
+          var $icons = $('<div class=icons></div>');
 
           window.visitor = $guestName;
 
@@ -119,9 +134,9 @@
           $user.html('<a href="#' + $guestName + '">@'
               + $guestName + '</a> '+ ' ~ ' + moment(date).fromNow()).prependTo($tweet);
           $message.html('<i>"</i>'+ $input+ '<i>"</i>').appendTo($tweet);
+          $icons.html('<i id="icon-img" class="far fa-comment">17</i>' + '<i id="icon-img" class="fas fa-retweet"> 5</i>' + '<i id="icon-img" class="far fa-heart"> 1238 </i>' + '<i id="icon-img" class="far fa-bookmark"></i>').appendTo($tweet);
           clearTimeline();
         });
-
 
       });
     </script>

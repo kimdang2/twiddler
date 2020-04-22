@@ -40,7 +40,7 @@ a:hover {
   text-decoration: underline;
 }
 
-h1,h2{
+h1{
   color: rgb(29, 161, 242);
   font-family: "Helvetica Neue";
   margin: 5px auto;
@@ -48,13 +48,24 @@ h1,h2{
   text-align: center;
 }
 
+h3{
+  color: rgb(29, 161, 242);
+  font-family: "Helvetica Neue";
+  margin: 5px auto;
+  font-size: 45px;
+}
+
 #btn{
   justify-content: space-evenly;
+}
 
+#input{
+  font-size:16px;
+  padding: 20px;
 }
 
 .btn-tweet, .btn-submit-tweet{
-  font-size: 14px;
+  font-size:12px;
   font-family: "Helvetica Neue";
   background: rgb(29, 161, 242);
   border-radius: 7px;
@@ -62,6 +73,21 @@ h1,h2{
   border-width: 1px;
   border-style: solid;
   box-shadow: 0 1px 3px gainsboro;
+  padding: 10px 20px 10px 20px;
+  margin: auto 5px;
+}
+
+#guestName{
+  font-size:12px;
+  font-family: "Helvetica Neue";
+  background:#fff;
+  border-radius: 7px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #fff;
+  box-shadow: 0 1px 3px gainsboro;
+  padding: 10px 20px 10px 20px;
+  margin: auto 5px;
 }
 
 .btn-tweet:active, .btn-tweet:hover{
@@ -74,17 +100,24 @@ h1,h2{
   color: rgb(29, 161, 242);
 }
 
-#input{
-  font-size:14px;
+.bio{
+  font-size:15px;
+  font-family: "Helvetica Neue";
+  line-height: 16px;
 }
 
-#guestName{
-  font-size: 14px;
-  font-family: "Helvetica Neue";
-  background:#fff;
-  border-radius: 7px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #fff;
-  box-shadow: 0 1px 3px gainsboro;
+span{
+  color:rgb(88, 87, 87);
+}
+
+.icons{
+  font-family: "Verdana";
+  display: flex;
+  color:rgba(129, 129, 129, 0.63);
+  font-weight: lighter;
+  justify-content: space-around;
+}
+
+.icons :hover{
+  color: blue;
 }
