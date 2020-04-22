@@ -9,10 +9,12 @@
   <body>
     <div class = "container">
       <h1 class ="title"> Twiddler</h1>
-      <button class='btn-tweet'> Tweet pending ... (1)</button>
-      <input id = "guestName" placeholder="Your username"><br>
-      <input id = "input" placeholder="Enter a new tweet"><br>
-      <button id = "btn-guest-tweet">Tweet</button>
+      <input class = 'tweet' id = "input" placeholder="What's happening?">
+      <div id ="btn">
+        <button class='btn-tweet'> View Tweet Pending ... (1)</button>
+        <input id = "guestName" placeholder="Enter Guest Here">
+        <button class='btn-submit-tweet' id = "btn-submit-tweet">Submit Tweet</button>
+      </div>
       <div class="newsfeed"></div>
     </div>
 
@@ -39,12 +41,9 @@
 
 
         // When clicked, button will display one new tweet
-        var button = function() {
-          $(".btn-tweet").click(function (){
+        $(".btn-tweet").click(function (){
           generateOneRandomTweet();
-          });
-        }
-        button();
+        });
 
         // When username name is clicked, displays user's timeline
         var clearTimeline = function() {
@@ -78,7 +77,7 @@
 
         clearTimeline();
 
-        //
+        //function displays user's timeline
         var usersTweets = function(username) {
           var index = 8;
           while(index >= 0){
@@ -98,7 +97,8 @@
         }
 
         // allow users to tweet
-        $("#btn-guest-tweet").click(function(){
+        // disclaimer: if guest name is clicked, will not show guest's timline
+        $("#btn-submit-tweet").click(function(){
           var $guestName = $("#guestName").val();
           var $input = $("#input").val();
           var $tweet = $('<div class=tweet></div>');
