@@ -12,7 +12,7 @@
       <input class = 'tweet' id = "input" placeholder="What's happening?">
       <div id ="btn">
         <button class='btn-tweet'> View Tweet Pending ... (1)</button>
-        <input id = "guestName" placeholder="Enter Guest Here">
+        <input id = "guestName" placeholder="Enter Guest Name">
         <button class='btn-submit-tweet' id = "btn-submit-tweet">Submit Tweet</button>
       </div>
       <div class="newsfeed"></div>
@@ -22,7 +22,7 @@
       $(document).ready(function(user){
         //displays a new tweet with message, user, and time each traversal
         var displayTweets = function() {
-          var index = 6;
+          var index = 3;
           while(index >= 0){
             var tweet = streams.home[index];
             var $tweet = $('<div class=tweet></div>');
@@ -97,7 +97,6 @@
         }
 
         // allow users to tweet
-        // disclaimer: if guest name is clicked, will not show guest's timline
         $("#btn-submit-tweet").click(function(){
           var $guestName = $("#guestName").val();
           var $input = $("#input").val();
@@ -110,6 +109,7 @@
           $user.html('<a href="#' + $guestName + '">@'
               + $guestName + '</a> '+ ' ~ ' + moment(date).fromNow()).prependTo($tweet);
           $message.html('<i>"</i>'+ $input+ '<i>"</i>').appendTo($tweet);
+          clearTimeline();
         });
 
 
