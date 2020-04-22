@@ -9,15 +9,17 @@
   <body>
     <div class = "container">
       <h1 class ="title"> Twiddler</h1>
-      <button class='btn-tweet'> (1) New Tweet</button>
+      <button class='btn-tweet'> Tweet pending ... (1)</button>
+      <input id = "guestName" placeholder="Your username"><br>
+      <input id = "input" placeholder="Enter a new tweet"><br>
+      <button id = "btn-guest-tweet">Tweet</button>
       <div class="newsfeed"></div>
     </div>
 
     <script>
       $(document).ready(function(user){
         //displays a new tweet with message, user, and time each traversal
-
-        var displayTweets = function(user) {
+        var displayTweets = function() {
           var index = 6;
           while(index >= 0){
             var tweet = streams.home[index];
@@ -25,17 +27,16 @@
             var $user = $('<div class=user></div>');
             var $message = $('<div class=message></div>');
             var $dateTime = $('<span class=dateTime></span>');
-            user = tweet.user || user;
             $tweet.appendTo(".newsfeed")
-            $user.html('<a href="#' + user + '">@'
-              + user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
+            $user.html('<a href="#' + tweet.user + '">@'
+              + tweet.user + '</a> '+ ' ~ ' + moment(tweet.created_at).fromNow()).prependTo($tweet);
             $message.html('<i>"</i>'+ tweet.message+ '<i>"</i>').appendTo($tweet);
 
             index -= 1;
           }
         }
         displayTweets();
-        //generateOneRandomTweet().show(5000);
+
 
         // When clicked, button will display one new tweet
         var button = function() {
@@ -44,6 +45,17 @@
           });
         }
         button();
+
+        // When username name is clicked, displays user's timeline
+        var clearTimeline = function() {
+            $("a").on('click', function(event) {
+              event.preventDefault();
+              var username = this.getAttribute('href').slice(1);
+              $('.container').html('');
+              var $timeline = $('<div class=newsfeed><h2>'+ username + '\'s Timeline</h2></div>').appendTo('.container');
+              usersTweets(username);
+          });
+        }
 
         // generates one new random tweet
         var generateOneRandomTweet = function(){
@@ -64,22 +76,13 @@
           clearTimeline();
         }
 
-        // When username name is clicked, displays user's timeline
-        var clearTimeline = function() {
-            $("a").on('click', function(event) {
-              event.preventDefault();
-              var username = this.getAttribute('href').slice(1);
-              $('.container').html('');
-              var $timeline = $('<div class=newsfeed><h2>'+ username + '\'s Timeline</h2></div>').appendTo('.container');
-              usersTweets(username);
-          });
-        }
         clearTimeline();
 
+        //
         var usersTweets = function(username) {
           var index = 8;
           while(index >= 0){
-            var tweet = streams.home[index]; // array of tweets
+            var tweet = streams.home[index];
             var $tweet = $('<div class=tweet></div>');
             var $user = $('<div class=user></div>');
             var $message = $('<div class=message></div>');
@@ -94,7 +97,23 @@
           }
         }
 
-      });//end of document.ready function
+        // allow users to tweet
+        $("#btn-guest-tweet").click(function(){
+          var $guestName = $("#guestName").val();
+          var $input = $("#input").val();
+          var $tweet = $('<div class=tweet></div>');
+          var $user = $('<div class=user></div>');
+          var $message = $('<div class=message></div>');
+          var date = new Date().toString()
+
+          $tweet.prependTo('.newsfeed')
+          $user.html('<a href="#' + $guestName + '">@'
+              + $guestName + '</a> '+ ' ~ ' + moment(date).fromNow()).prependTo($tweet);
+          $message.html('<i>"</i>'+ $input+ '<i>"</i>').appendTo($tweet);
+        });
+
+
+      });
     </script>
 
 
