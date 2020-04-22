@@ -40,7 +40,7 @@ a:hover {
   text-decoration: underline;
 }
 
-h1{
+h1, h3{
   color: rgb(29, 161, 242);
   font-family: "Helvetica Neue";
   margin: 5px auto;
@@ -48,12 +48,6 @@ h1{
   text-align: center;
 }
 
-h3{
-  color: rgb(29, 161, 242);
-  font-family: "Helvetica Neue";
-  margin: 5px auto;
-  font-size: 45px;
-}
 
 #btn{
   justify-content: space-evenly;
@@ -104,6 +98,7 @@ h3{
   font-size:15px;
   font-family: "Helvetica Neue";
   line-height: 16px;
+  text-align: center;
 }
 
 span{
@@ -119,5 +114,6 @@ span{
 }
 
 .icons :hover{
-  color: blue;
+  color: rgb(29, 161, 242);
+  opacity: 0.3;
 }
