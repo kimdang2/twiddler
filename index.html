@@ -4,11 +4,14 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://kit.fontawesome.com/128037f178.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="main.css">
+    <title> Twiddle</title>
+    <link rel="icon" href="images/twitter-logo.png" type="image/icon type">
   </head>
   <body>
     <div class = "container">
-      <h1 class ="title"> Twiddler</h1>
+      <h1 class ="title"> <i class="fab fa-twitter"></i> Twiddler</h1>
       <input class = 'tweet' id = "input" placeholder="What's happening?">
       <div id ="btn">
         <button class='btn-tweet'> View Tweet Pending ... (1)</button>
@@ -51,7 +54,7 @@
               event.preventDefault();
               var username = this.getAttribute('href').slice(1);
               $('.container').html('');
-              var $timeline = $('<div class=newsfeed><h2>'+ username + '\'s Timeline</h2></div>').appendTo('.container');
+              var $timeline = $('<div class=newsfeed><h2><i class="fab fa-twitter"></i> '+ username + '\'s Timeline</h2></div>').appendTo('.container');
               usersTweets(username);
           });
         }
@@ -104,6 +107,13 @@
           var $user = $('<div class=user></div>');
           var $message = $('<div class=message></div>');
           var date = new Date().toString()
+
+          window.visitor = $guestName;
+
+          if (!streams.users[window.visitor]){
+            streams.users[window.visitor] = [];
+          }
+          writeTweet($input);
 
           $tweet.prependTo('.newsfeed')
           $user.html('<a href="#' + $guestName + '">@'
