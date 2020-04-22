@@ -123,13 +123,6 @@
           var date = new Date().toString()
           var $icons = $('<div class=icons></div>');
 
-          window.visitor = $guestName;
-
-          if (!streams.users[window.visitor]){
-            streams.users[window.visitor] = [];
-          }
-          writeTweet($input);
-
           $tweet.prependTo('.newsfeed')
           $user.html('<a href="#' + $guestName + '">@'
               + $guestName + '</a> '+ ' ~ ' + moment(date).fromNow()).prependTo($tweet);
