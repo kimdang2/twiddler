@@ -114,7 +114,7 @@
         }
 
         // allow users to tweet
-        $("#btn-submit-tweet").click(function(){
+        $("#btn-submit-tweet").on('click', function() {
           var $guestName = $("#guestName").val();
           var $input = $("#input").val();
           var $tweet = $('<div class=tweet></div>');
@@ -128,7 +128,7 @@
               + $guestName + '</a> '+ ' ~ ' + moment(date).fromNow()).prependTo($tweet);
           $message.html('<i>"</i>'+ $input+ '<i>"</i>').appendTo($tweet);
           $icons.html('<i id="icon-img" class="far fa-comment">17</i>' + '<i id="icon-img" class="fas fa-retweet"> 5</i>' + '<i id="icon-img" class="far fa-heart"> 1238 </i>' + '<i id="icon-img" class="far fa-bookmark"></i>').appendTo($tweet);
-          clearTimeline();
+
         });
 
       });
